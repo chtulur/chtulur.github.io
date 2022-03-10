@@ -1,0 +1,25 @@
+TerraCycle - Frontend Developer Test Exercise
+Create a vending machine - first the html/css based on the assets attached. The functionality of it is only described with the happy path, feel free handling any of the edge-cases you can find. 
+
+The machine
+
+has five rows and five columns - each is a 'place'
+each place can have 3 pieces - of one and only one product
+3 products
+Snickers   220 Ft
+Mars       190 Ft
+Bomba      315 Ft
+users can only insert 50, 100, 200 Ft coins
+
+The way it works:
+
+The user inserts money with clicking on the grey coins
+The machine shows the running sum
+When the 'C' button under the coins is pushed, all coins are given back to the user.
+The user can choose one of the products - by adding its place on the numpad.
+With numpad 'C' the user can cancel submitting the number 
+The 'OK' button finishes the process
+one product is pushed down, waits there 3 secs, then disappears
+6 types of coins the machine has unlimited supply of are 5, 10, 20, 50, 100, 200 Ft
+any odd money is as well served on its own place at the bottom
+

@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap");
+
+$bottom: 23rem;
+$zindex: 3;
+
+@mixin put-in-slot($top, $right, $zindex) {
+  top: $top;
+  &:first-child {
+    right: $right;
+    z-index: $zindex;
+  }
+  &:nth-child(2) {
+    right: $right - 0.5rem;
+    z-index: $zindex + 1;
+  }
+  &:nth-child(3) {
+    right: $right - 1rem;
+    z-index: $zindex + 2;
+  }
+}
+
+@mixin grid($top, $right, $width, $height, $row, $col) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  width: $width;
+  height: $height;
+  display: grid;
+  grid-template-columns: repeat($row, 1fr);
+  grid-template-rows: repeat($col, 1fr);
+}
+
+.instructions {
+  font-size: 1.2rem;
+}
+
+.coins {
+  user-select: none;
+  height: 681.94px;
+  .user-coins {
+    width: 20rem;
+    border: solid 5px black;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: lightgray;
+    &__coin {
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  .coin {
+    width: 4rem;
+  }
+}
+.machine-coins {
+  padding-bottom: 15rem;
+}
+
+.vending-machine {
+  width: 30rem;
+  user-select: none;
+  .bottom_vending {
+    width: 0rem;
+    height: 0rem;
+    position: relative;
+    &__box {
+      transform: scaleX(1.008);
+      position: absolute;
+      top: 10.3rem;
+      right: 9.55rem;
+      z-index: 99;
+    }
+  }
+
+  .display {
+    position: relative;
+    &__box {
+      position: absolute;
+      top: -18.2rem;
+      right: 2.28rem;
+      &__img {
+        width: 5.5rem;
+      }
+      &__dial {
+        position: absolute;
+        top: 0rem;
+        right: -0.4rem;
+        width: 5.5rem;
+        height: 3rem;
+        color: rgb(224, 63, 23);
+        font-size: 2rem;
+        font-family: "Titillium Web", sans-serif;
+      }
+    }
+  }
+  .eject-coins {
+    position: relative;
+    &__box {
+      position: absolute;
+      top: -11.7rem;
+      right: 3rem;
+      &__img {
+        width: 2rem;
+        &:hover {
+          transform: scale(1.04);
+        }
+      }
+    }
+  }
+
+  .num-pad {
+    width: 0;
+    height: 0;
+    position: relative;
+    &__container {
+      @include grid(-8.8rem, 2.5rem, 4.6rem, 7.2rem, 3, 4);
+    }
+    &__box {
+      display: flex;
+      align-items: center;
+      &__number {
+        position: absolute;
+        pointer-events: none;
+        padding-left: 0.4rem;
+        font-size: 10.5px;
+        z-index: 1;
+      }
+      &__img {
+        position: absolute;
+        width: 1.2rem;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  .slot-numbers {
+    width: 0;
+    height: 0;
+    position: relative;
+    &__container {
+      @include grid(-14.2rem, 8.7rem, 18.5rem, 26.5rem, 5, 5);
+      z-index: 10;
+    }
+    &__box {
+      &__img {
+        width: 1.8rem;
+      }
+      &__num {
+        position: absolute;
+        color: white;
+        z-index: 1;
+        padding-left: 0.3rem;
+        padding-top: 0.1rem;
+      }
+    }
+  }
+  .products {
+    position: relative;
+    &__container {
+      position: absolute;
+      height: 29rem;
+      width: 18.5rem;
+      top: -18.5rem;
+      right: 9.6rem;
+    }
+    &__mars {
+      & img {
+        width: 2.8rem;
+        position: absolute;
+        transform: rotate(-15deg);
+      }
+      &__23__img {
+        @include put-in-slot(7rem, 8.5rem, $zindex);
+      }
+      &__31__img {
+        @include put-in-slot(12.7rem, 15.8rem, $zindex);
+      }
+      &__42__img {
+        @include put-in-slot(17.8rem, 12rem, $zindex);
+      }
+      &__55__img {
+        @include put-in-slot($bottom, 1rem, $zindex);
+      }
+    }
+
+    &__snickers {
+      & img {
+        width: 2.8rem;
+        position: absolute;
+        transform: rotate(-15deg);
+      }
+      &__11__img {
+        @include put-in-slot(2rem, 15.8rem, $zindex);
+      }
+      &__53__img {
+        @include put-in-slot($bottom, 8.5rem, $zindex);
+      }
+      &__35__img {
+        @include put-in-slot(12.5rem, 1.1rem, $zindex);
+      }
+      &__15__img {
+        @include put-in-slot(2rem, 1.1rem, $zindex);
+      }
+    }
+    &__bomb {
+      & img {
+        width: 1.3rem;
+        position: absolute;
+      }
+      &__24__img {
+        @include put-in-slot(6.7rem, 5.3rem, $zindex);
+      }
+      &__34__img {
+        @include put-in-slot(12rem, 5.3rem, $zindex);
+      }
+      &__22__img {
+        @include put-in-slot(6.7rem, 12.7rem, $zindex);
+      }
+      &__51__img {
+        @include put-in-slot(22.5rem, 16.1rem, $zindex);
+      }
+    }
+  }
+}
+
+.eject_bar {
+  animation: drop_it 1s ease-in forwards 0.5s;
+}
+
+@keyframes drop_it {
+  0% {
+    z-index: 20;
+  }
+  80% {
+    filter: brightness(80%);
+  }
+  100% {
+    top: 510px;
+    transform: rotate(95deg);
+    filter: brightness(50%);
+  }
+}
