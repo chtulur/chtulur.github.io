@@ -28,12 +28,16 @@
           transform: scale(1.05);
 }
 
+.coins .change_text {
+  margin-top: 5rem;
+}
+
 .coins .coin {
   width: 4rem;
 }
 
 .machine-coins {
-  padding-bottom: 15rem;
+  padding-bottom: 20rem;
 }
 
 .vending-machine {
