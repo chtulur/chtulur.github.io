@@ -149,14 +149,21 @@ const startDispention = (desiredProduct) => {
 };
 
 //KEYPRESS RELATED
-const isEnterPressed = (instruction, desiredProduct) => {
+const checkEnter = (instruction) => {
   if (
     instruction === "NumpadEnter" ||
     instruction === "button-ok" ||
     instruction === "Enter"
   ) {
-    startDispention(desiredProduct);
+    return true;
+  } else {
+    return false;
   }
+};
+
+const isEnterPressed = (instruction, desiredProduct) => {
+  if (!checkEnter(instruction)) return;
+  startDispention(desiredProduct);
 };
 
 const isCPressed = (instruction) => {
@@ -190,7 +197,7 @@ const keypress = (ev) => {
   if (isDispensed) return;
   let instruction = ev.code !== undefined ? ev.code : ev.target.alt;
   if (inputList.includes(instruction)) {
-    if (coinsDisplayed) {
+    if (coinsDisplayed && !checkEnter(instruction)) {
       clearCoinDisplay();
     }
     resolveKeyPress(instruction);
@@ -242,11 +249,12 @@ const insertCoin = (ev) => {
     clearDisplay();
     slotNumDisplayed = false;
   }
+  addCoins(ev);
   if (currentSum > 1000) {
     dispenseChange(insertedCoins);
     giveSumBack();
   }
-  addCoins(ev);
+
   display.textContent = currentSum < 1001 ? currentSum : (currentSum = 0);
   if (coinsDisplayed === true) return;
   coinsDisplayed = true;
