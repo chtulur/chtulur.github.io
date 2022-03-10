@@ -40,10 +40,6 @@ const keyPress = (display, instruction) => {
     case "button-0":
       display.textContent += 0;
       break;
-    case "KeyC":
-    case "button-c":
-      display.textContent = "";
-      break;
   }
 };
 

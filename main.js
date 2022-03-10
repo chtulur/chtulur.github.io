@@ -4,7 +4,6 @@ import inputList from "./input_list.js";
 let coinsDisplayed = false;
 let currentSum = 0;
 let slotNumDisplayed = false;
-let desiredProduct;
 let isDispensed = false;
 let isCurrentSumEjected = false;
 
@@ -150,7 +149,7 @@ const startDispention = (desiredProduct) => {
 };
 
 //KEYPRESS RELATED
-const isEnterPressed = (instruction) => {
+const isEnterPressed = (instruction, desiredProduct) => {
   if (
     instruction === "NumpadEnter" ||
     instruction === "button-ok" ||
@@ -160,15 +159,24 @@ const isEnterPressed = (instruction) => {
   }
 };
 
+const isCPressed = (instruction) => {
+  if (instruction === "KeyC" || instruction === "button-c") {
+    display.textContent = currentSum;
+    coinsDisplayed = true;
+  }
+};
+
 const resolveKeyPress = (instruction) => {
   let charsInDisplay = display.textContent.split("").length;
-  desiredProduct = display.textContent;
+  let desiredProduct = display.textContent;
 
   if (charsInDisplay < 2) {
     keyPress(display, instruction);
+    isCPressed(instruction);
   } else if (charsInDisplay === 2) {
     clearDisplay();
-    isEnterPressed(instruction);
+    isCPressed(instruction);
+    isEnterPressed(instruction, desiredProduct);
     keyPress(display, instruction);
   }
 };
@@ -234,17 +242,17 @@ const insertCoin = (ev) => {
     clearDisplay();
     slotNumDisplayed = false;
   }
-  addCoins(ev);
   if (currentSum > 1000) {
     dispenseChange(insertedCoins);
     giveSumBack();
   }
+  addCoins(ev);
   display.textContent = currentSum < 1001 ? currentSum : (currentSum = 0);
   if (coinsDisplayed === true) return;
   coinsDisplayed = true;
 };
 
-//EVENT LISTENERS
+//Numpad img switches when pressed
 const machineNumkeysPressed = (ev) => {
   ev.target.src = "./assets/pinpad-button-pressed.png";
 };
@@ -253,9 +261,10 @@ const machineNumkeysreleased = (ev) => {
   ev.target.src = "./assets/pinpad-button-normal.png";
 };
 
+//EVENT LISTENERS
 document.addEventListener("keydown", keypress);
-numPad.forEach((num) => num.addEventListener("click", keypress));
 numPad.forEach((num) => {
+  num.addEventListener("click", keypress);
   num.addEventListener("mousedown", machineNumkeysPressed);
   num.addEventListener("mouseup", machineNumkeysreleased);
 });
